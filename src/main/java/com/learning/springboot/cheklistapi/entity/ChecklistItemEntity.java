@@ -1,16 +1,16 @@
 package com.learning.springboot.cheklistapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 import java.time.LocalTime;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@Entity
+@Table(indexes = { @Index(name = "IDX_GUID_CK_CAT", columnList = "guid") })
 public class ChecklistItemEntity extends BaseEntity{
 
     private Long checklistItemId;

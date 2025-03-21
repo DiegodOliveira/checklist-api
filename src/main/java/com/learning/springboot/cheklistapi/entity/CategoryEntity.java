@@ -1,19 +1,20 @@
 package com.learning.springboot.cheklistapi.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@Entity
+@Table(indexes = { @Index(name = "IDX_GUID_CAT", columnList = "guid") })
 public class CategoryEntity extends BaseEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long CategoryId;
 
     private String name;
