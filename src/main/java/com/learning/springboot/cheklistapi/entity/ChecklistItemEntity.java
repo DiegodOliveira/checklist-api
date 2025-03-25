@@ -1,9 +1,7 @@
 package com.learning.springboot.cheklistapi.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -13,6 +11,8 @@ import java.time.LocalTime;
 @Table(indexes = { @Index(name = "IDX_GUID_CK_CAT", columnList = "guid") })
 public class ChecklistItemEntity extends BaseEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checklistItemId;
 
     private String description;
@@ -23,5 +23,6 @@ public class ChecklistItemEntity extends BaseEntity{
 
     private LocalTime postDate;
 
+    @ManyToOne
     private CategoryEntity category;
 }

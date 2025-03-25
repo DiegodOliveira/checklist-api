@@ -1,8 +1,5 @@
 package com.learning.springboot.cheklistapi.entity;
 
-
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +14,9 @@ public class CategoryEntity extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long CategoryId;
 
+    @Column(unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<ChecklistItemEntity> checklistItems;
 }
