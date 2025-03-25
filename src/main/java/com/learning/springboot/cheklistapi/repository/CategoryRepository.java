@@ -10,6 +10,6 @@ public interface CategoryRepository extends PagingAndSortingRepository<Checklist
 
     Optional<CategoryEntity> findByName(String name);
 
-    Optional<CategoryEntity> findByGuid(String name);
+    Optional<CategoryEntity> findByGuid(String guid);
 
 }
