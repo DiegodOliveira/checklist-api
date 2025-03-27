@@ -21,7 +21,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public CategoryEntity AddNewCategory(String name){
+    public CategoryEntity addNewCategory(String name){
 
         if(!StringUtils.hasText(name)){
             throw new IllegalArgumentException("Category name cannot be empty or null");
@@ -32,8 +32,6 @@ public class CategoryService {
         newCategory.setName(name);
 
         return this.categoryRepository.save(newCategory);
-
-
     }
 
 }
