@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ChecklistItemRepository extends JpaRepository<ChecklistItemEntity, Long> {
+public interface  ChecklistItemRepository extends JpaRepository<ChecklistItemEntity, Long> {
 
     Optional<ChecklistItemEntity> findByGuid(String guid);
 

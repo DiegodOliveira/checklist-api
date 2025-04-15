@@ -30,4 +30,8 @@ public class CategoryEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<ChecklistItemEntity> checklistItems;
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

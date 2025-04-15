@@ -8,4 +8,8 @@ import lombok.Data;
 public class BaseEntity {
 
     private String guid;
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
 }
