@@ -12,8 +12,7 @@ public interface  ChecklistItemRepository extends JpaRepository<ChecklistItemEnt
 
     Optional<ChecklistItemEntity> findByGuid(String guid);
 
-    List<ChecklistItemEntity> findByDescriptionAndIsCOmpleted(String description, Boolean isCompleted);
+    List<ChecklistItemEntity> findByDescriptionAndIsCompleted(String description, Boolean isCompleted);
 
     List<ChecklistItemEntity> findByCategoryGuid(String guid);
-
 }
