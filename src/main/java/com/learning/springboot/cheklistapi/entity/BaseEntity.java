@@ -12,4 +12,9 @@ public class BaseEntity {
     public void setGuid(String guid) {
         this.guid = guid;
     }
+
+    public Object getGuid() {
+
+        return guid;
+    }
 }

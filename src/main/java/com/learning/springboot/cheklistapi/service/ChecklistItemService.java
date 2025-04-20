@@ -104,7 +104,7 @@ public class ChecklistItemService {
         return checklistItemRepository.save(checklistItemEntity);
     }
 
-    public Iterable<ChecklistItemEntity> findallChecklistItems(){
+    public Iterable<ChecklistItemEntity> findAllChecklistItems(){
         return this.checklistItemRepository.findAll();
     }
 
