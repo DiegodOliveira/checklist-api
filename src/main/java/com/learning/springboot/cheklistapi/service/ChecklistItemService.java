@@ -20,7 +20,7 @@ import java.util.UUID;
 @Service
 public class ChecklistItemService {
 
-    private static final Logger log = LogManager.getLogger(ChecklistItemService.class);
+    // private static final Logger log = LogManager.getLogger(ChecklistItemService.class);
     @Autowired
     private ChecklistItemRepository checklistItemRepository;
 

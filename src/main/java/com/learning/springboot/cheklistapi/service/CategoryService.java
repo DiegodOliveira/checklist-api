@@ -22,7 +22,7 @@ import java.util.UUID;
 @Service
 public class CategoryService {
 
-    private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
+    // private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
     private ChecklistItemRepository checklistItemRepository;
     private CategoryRepository categoryRepository;
 

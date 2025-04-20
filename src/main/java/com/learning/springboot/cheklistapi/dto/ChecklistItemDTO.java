@@ -2,9 +2,11 @@ package com.learning.springboot.cheklistapi.dto;
 
 import com.learning.springboot.cheklistapi.entity.ChecklistItemEntity;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDate;
 @Builder
+@Getter
 public class ChecklistItemDTO {
 
     private String guid;
@@ -15,7 +17,7 @@ public class ChecklistItemDTO {
 
     private LocalDate deadline;
 
-    private LocalDate postDate;
+    private LocalDate postedDate;
 
     private String categoryGuid;
 
