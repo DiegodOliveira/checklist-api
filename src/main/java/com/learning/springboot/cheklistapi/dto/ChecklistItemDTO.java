@@ -19,19 +19,22 @@ public class ChecklistItemDTO {
 
     private LocalDate postedDate;
 
-    private String categoryGuid;
+    private CategoryDTO category;
 
     public static ChecklistItemDTO toDTO(ChecklistItemEntity checklistItemEntity) {
 
-        ChecklistItemDTO.builder()
+         return  ChecklistItemDTO.builder()
                 .guid(checklistItemEntity.getGuid())
                 .description(checklistItemEntity.getDescription())
                 .deadline(checklistItemEntity.getDeadline())
                 .postedDate(checklistItemEntity.getPostDate())
                 .isCompleted(checklistItemEntity.getCompleted())
-                .categoryGuid(checklistItemEntity.getCategory().getGuid())
+                 .category(checklistItemEntity.getCategory() != null ?
+                         CategoryDTO.builder()
+                                 .guid(checklistItemEntity.getCategory().getGuid())
+                                 .name(checklistItemEntity.getCategory().getName())
+                                 .build() :
+                         null)
                 .build();
-
-        return null;
     }
 }

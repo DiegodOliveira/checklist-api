@@ -1,10 +1,14 @@
 package com.learning.springboot.cheklistapi.controller;
 
 import com.learning.springboot.cheklistapi.dto.ChecklistItemDTO;
+import com.learning.springboot.cheklistapi.entity.ChecklistItemEntity;
 import com.learning.springboot.cheklistapi.service.ChecklistItemService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,7 +33,28 @@ public class ChecklistItemController {
 
 
 
-        return null;
+        return new ResponseEntity<>(resp,HttpStatus.OK);
     }
+
+    // POST
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> createNewChecklistItem(@RequestBody ChecklistItemDTO checklistItemDTO){
+
+        if(checklistItemDTO.getCategory() == null){
+
+        }
+
+        ChecklistItemEntity newChecklistItem =  this.checklistItemService.addNewChecklistitem(
+                checklistItemDTO.getDescription(), checklistItemDTO.getIsCompleted(), checklistItemDTO.getDeadline(),
+                checklistItemDTO.getCategory().getGuid()
+        );
+
+        return new ResponseEntity<>(newChecklistItem.getGuid(), HttpStatus.CREATED);
+
+    }
+
+    // PUT
+
+    // DELETE
 
 }
