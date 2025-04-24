@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@RestController("/api/v1/checklist-items")
+@RestController
+@RequestMapping("/api/v1/checklist-items")
 public class ChecklistItemController {
 
     private ChecklistItemService checklistItemService;
