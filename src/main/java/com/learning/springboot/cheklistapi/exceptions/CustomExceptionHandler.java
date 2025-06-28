@@ -1,5 +1,6 @@
 package com.learning.springboot.cheklistapi.exceptions;
 
+import jakarta.xml.bind.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(new ExceptionalResponse(LocalDateTime.now(), ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY),
                 HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 
-
+    @ExceptionHandler(ValidationException.class)
+    public final ResponseEntity<ExceptionalResponse> handleValidationException(Exception ex, ValidationException validationException){
+        log.error("An validation error happened to call API: {}", validationException);
+        return new ResponseEntity<>(new ExceptionalResponse(LocalDateTime.now(), ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY),
+                HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
 
