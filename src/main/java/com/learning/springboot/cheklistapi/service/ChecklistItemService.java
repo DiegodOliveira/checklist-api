@@ -98,6 +98,7 @@ public class ChecklistItemService {
         checklistItemEntity.setDeadline(deadline);
         checklistItemEntity.setPostDate(LocalDate.now());
         checklistItemEntity.setCategory(retrievedCategory);
+        checklistItemEntity.setIsCompleted(isCompleted);
 
         log.debug("Adding new checklist item [ checklistItem = {} ]", checklistItemEntity);
 
