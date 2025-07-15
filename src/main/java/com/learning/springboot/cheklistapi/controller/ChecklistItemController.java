@@ -2,6 +2,7 @@ package com.learning.springboot.cheklistapi.controller;
 
 import com.learning.springboot.cheklistapi.dto.ChecklistItemDTO;
 import com.learning.springboot.cheklistapi.dto.NewResourceDTO;
+import com.learning.springboot.cheklistapi.dto.UpdateStatusDTO;
 import com.learning.springboot.cheklistapi.entity.ChecklistItemEntity;
 import com.learning.springboot.cheklistapi.service.ChecklistItemService;
 import org.springframework.http.HttpStatus;
@@ -75,6 +76,12 @@ public class ChecklistItemController {
     public ResponseEntity<Void> deleteChecklistItem(@PathVariable String guid){
         this.checklistItemService.deleteChecklistItem(guid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping(value = "{guid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateCompletedStatus(@PathVariable String guid, @RequestBody UpdateStatusDTO status){
+        this.checklistItemService.updateChecklistItem(guid, status.isComplete);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }
