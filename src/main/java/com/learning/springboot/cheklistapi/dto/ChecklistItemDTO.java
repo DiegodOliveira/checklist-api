@@ -35,7 +35,7 @@ public class ChecklistItemDTO {
                 .description(checklistItemEntity.getDescription())
                 .deadline(checklistItemEntity.getDeadline())
                 .postedDate(checklistItemEntity.getPostDate())
-                .isCompleted(checklistItemEntity.getCompleted())
+                .isCompleted(checklistItemEntity.getIsCompleted())
                  .category(checklistItemEntity.getCategory() != null ?
                          CategoryDTO.builder()
                                  .guid(checklistItemEntity.getCategory().getGuid())

@@ -58,7 +58,7 @@ public class ChecklistItemService {
         }
 
         if(isCompleted != null){
-            retrievedItem.setCompleted(isCompleted);
+            retrievedItem.setIsCompleted(isCompleted);
         }
 
         if(deadline != null){
