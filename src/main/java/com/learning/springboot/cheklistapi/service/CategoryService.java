@@ -47,12 +47,12 @@ public class CategoryService {
     }
 
     public CategoryEntity updateCategory(String guid, String name){
-        if(guid == null || !StringUtils.hasText(name)){
+        if(!StringUtils.hasText(guid) || !StringUtils.hasText(name)){
             throw new IllegalArgumentException("Invalid parameters provided to update a category");
         }
 
         CategoryEntity retrievedCategory = this.categoryRepository.findByGuid(guid).orElseThrow(
-                () -> new ResourceNotFoundException("Catgeory not found."));
+                () -> new ResourceNotFoundException("Category not found."));
 
         retrievedCategory.setName(name);
         log.debug("Updating category [guid = {}, newName = {} ]", guid, name);
