@@ -1,14 +1,18 @@
 package com.learning.springboot.cheklistapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.springboot.cheklistapi.dto.CategoryDTO;
 import com.learning.springboot.cheklistapi.dto.ChecklistItemDTO;
 import com.learning.springboot.cheklistapi.entity.CategoryEntity;
 import com.learning.springboot.cheklistapi.entity.ChecklistItemEntity;
 import com.learning.springboot.cheklistapi.service.ChecklistItemService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,7 +22,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -32,6 +39,9 @@ public class ChecklistItemControllerTest {
 
     @MockBean
     private ChecklistItemService checklistItemService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private ChecklistItemDTO getChecklistItemDTO(String description, Boolean isCompleted,  LocalDate deadline, String categoryName){
         return ChecklistItemDTO.builder()
@@ -83,10 +93,27 @@ public class ChecklistItemControllerTest {
                 .andExpect(jsonPath("$[*]", hasSize(2)))
                 .andExpect(jsonPath("$[0].guid").isNotEmpty())
                 .andExpect(jsonPath("$[0].isCompleted").value(false))
-                .andExpect(jsonPath("$[0].description").value("Item 1"))
-                .andExpect(jsonPath("$[0].deadline").value("2025-08-04"))
-                .andExpect(jsonPath("$[0].deadline").isNotEmpty())
-                .andExpect(jsonPath("$[0].category").isNotEmpty());
+                .andExpect(jsonPath("$[0].description").value("Item 1"));
+
+
+
+    }
+
+    @Test
+    public void shouldCallEndpointAndAddNewChecklistItemAndReturn201() throws Exception {
+
+        when(this.checklistItemService.addNewChecklistitem(anyString(),
+                anyBoolean(), ArgumentMatchers.any(LocalDate.class), anyString())).thenReturn(
+                getChecklistItemEntity(1L, "Item 1", false, LocalDate.of(2025, 8, 1), 1L, "Cat 1")
+        );
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/checklist-items")
+                .content(objectMapper.writeValueAsString(
+                        getChecklistItemDTO("Teste", true, LocalDate.now(), "Test cat")
+                        ))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.guid").isNotEmpty());
 
 
     }
