@@ -72,7 +72,7 @@ public class ChecklistItemController {
 
 
     // DELETE
-    @DeleteMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{guid}")
     public ResponseEntity<Void> deleteChecklistItem(@PathVariable String guid){
         this.checklistItemService.deleteChecklistItem(guid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -140,12 +140,12 @@ public class ChecklistItemControllerTest {
     @Test
     public void shouldCallEndpointAndDeleteChecklistItemAndReturn204() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/checklist-items")
-                        .content(objectMapper.writeValueAsString(
-                                getChecklistItemDTO("Teste", true, LocalDate.now(), "Test cat")
-                        ))
+        String checklistItemGuid = UUID.randomUUID().toString();
+
+        this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/checklist-items/{guid}", checklistItemGuid)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
+                        .andDo(print())
+                        .andExpect(status().isNoContent());
 
 
     }
