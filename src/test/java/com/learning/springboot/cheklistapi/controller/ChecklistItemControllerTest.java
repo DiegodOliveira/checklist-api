@@ -118,4 +118,36 @@ public class ChecklistItemControllerTest {
 
     }
 
+    @Test
+    public void shouldCallEndpointAndUpdateChecklistItemAndReturn204() throws Exception {
+
+        when(this.checklistItemService.addNewChecklistitem(anyString(),
+                anyBoolean(), ArgumentMatchers.any(LocalDate.class), anyString())).thenReturn(
+                getChecklistItemEntity(1L, "Item 1", false, LocalDate.of(2025, 8, 1), 1L, "Cat 1")
+        );
+
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/checklist-items")
+                        .content(objectMapper.writeValueAsString(
+                                getChecklistItemDTO("Teste", true, LocalDate.now(), "Test cat")
+                        ))
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andDo(print())
+                        .andExpect(status().isNoContent());
+
+
+    }
+
+    @Test
+    public void shouldCallEndpointAndDeleteChecklistItemAndReturn204() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/checklist-items")
+                        .content(objectMapper.writeValueAsString(
+                                getChecklistItemDTO("Teste", true, LocalDate.now(), "Test cat")
+                        ))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+
+    }
+
 }
